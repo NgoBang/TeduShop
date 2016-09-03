@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
-using TeduShop.Model.Models;
+using TeduShop.Model.Abstract;
 
-namespace TeduShop.Model.Abstract
+namespace TeduShop.Model.Models
 {
     [Table("Products")]
     public class Product : Auditable
@@ -26,7 +25,8 @@ namespace TeduShop.Model.Abstract
         [MaxLength(256)]
         public string Image { get; set; }
 
-        public XElement MoreImages { get; set; }
+        [Column(TypeName = "xml")]
+        public string MoreImages { get; set; }
 
         public decimal Price { get; set; }
         public decimal? PromotionPrice { get; set; }

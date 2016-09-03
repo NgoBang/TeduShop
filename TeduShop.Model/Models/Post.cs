@@ -24,7 +24,7 @@ namespace TeduShop.Model.Models
         public int CategoryID { get; set; }
 
         [MaxLength(256)]
-        public int Image { get; set; }
+        public string Image { get; set; }
 
         [MaxLength(500)]
         public string Description { get; set; }
