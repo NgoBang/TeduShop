@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using TeduShop.Common.Infrastructure;
 
 namespace TeduShop.Data.Infrastructure
 {
@@ -48,6 +47,11 @@ namespace TeduShop.Data.Infrastructure
 
         public virtual void Delete(T entity)
         {
+            dbSet.Remove(entity);
+        }
+        public void Delete(int id)
+        {
+            var entity = dbSet.Find(id);
             dbSet.Remove(entity);
         }
 
@@ -133,6 +137,8 @@ namespace TeduShop.Data.Infrastructure
         {
             return dataContext.Set<T>().Count<T>(predicate) > 0;
         }
+
+
 
         #endregion Implementation
     }

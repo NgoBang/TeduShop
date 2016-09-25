@@ -1,9 +1,8 @@
-﻿using TeduShop.Common.Infrastructure;
-using TeduShop.Data.Infrastructure;
+﻿using TeduShop.Data.Infrastructure;
 
 namespace TeduShop.Data.Repositories
 {
-    public interface IProductTagRepository { }
+    public interface IProductTagRepository : IRepository<ProductTag> { }
 
     public class ProductTag : RepositoryBase<ProductTag>, IProductTagRepository
     {

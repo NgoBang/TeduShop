@@ -1,10 +1,9 @@
-﻿using TeduShop.Common.Infrastructure;
-using TeduShop.Data.Infrastructure;
+﻿using TeduShop.Data.Infrastructure;
 using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Repositories
 {
-    public interface ISystemConfigRepository { }
+    public interface ISystemConfigRepository : IRepository<SystemConfig> { }
 
     public class SystemConfigRepository : RepositoryBase<SystemConfig>, ISystemConfigRepository
     {

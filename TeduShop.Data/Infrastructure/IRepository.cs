@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace TeduShop.Common.Infrastructure
+namespace TeduShop.Data.Infrastructure
 {
     public interface IRepository<T> where T : class
     {
@@ -11,6 +11,8 @@ namespace TeduShop.Common.Infrastructure
         void Update(T entity);
 
         void Delete(T entity);
+
+        void Delete(int id);
 
         void DeleteMulti(Expression<Func<T, bool>> where);
 
