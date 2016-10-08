@@ -16,38 +16,40 @@ namespace TeduShop.Web.Infrastructure.Core
 
         public ApiControllerBase(IErrorService errorService)
         {
-            _errorService = errorService;
+            this._errorService = errorService;
         }
 
         protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)
         {
-            HttpResponseMessage reponse = null;
+            HttpResponseMessage response = null;
             try
             {
-                reponse = function.Invoke();
+                response = function.Invoke();
             }
             catch (DbEntityValidationException ex)
             {
                 foreach (var eve in ex.EntityValidationErrors)
                 {
-                    Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation errors");
+                    Trace.WriteLine($"Entity of type \"{eve.Entry.Entity.GetType().Name}\" in state \"{eve.Entry.State}\" has the following validation error.");
                     foreach (var ve in eve.ValidationErrors)
                     {
                         Trace.WriteLine($"- Property: \"{ve.PropertyName}\", Error: \"{ve.ErrorMessage}\"");
                     }
                 }
+                LogError(ex);
+                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.Message);
             }
             catch (DbUpdateException dbEx)
             {
                 LogError(dbEx);
-                reponse = requestMessage.CreateResponse(HttpStatusCode.BadRequest, dbEx.InnerException.Message);
+                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, dbEx.InnerException.Message);
             }
             catch (Exception ex)
             {
                 LogError(ex);
-                reponse = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
-            return reponse;
+            return response;
         }
 
         private void LogError(Exception ex)
@@ -63,7 +65,6 @@ namespace TeduShop.Web.Infrastructure.Core
             }
             catch
             {
-                throw;
             }
         }
     }

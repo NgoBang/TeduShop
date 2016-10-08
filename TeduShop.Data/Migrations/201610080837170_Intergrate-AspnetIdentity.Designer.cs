@@ -13,7 +13,7 @@ namespace TeduShop.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201610041033499_Intergrate-AspnetIdentity"; }
+            get { return "201610080837170_Intergrate-AspnetIdentity"; }
         }
         
         string IMigrationMetadata.Source
