@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TeduShop.Web.Models
 {
     public class ProductCategoryViewModel
     {
         public int ID { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public string Alias { get; set; }
         public string Description { get; set; }
         public int? ParentID { get; set; }
@@ -19,7 +24,9 @@ namespace TeduShop.Web.Models
         public string UpdateBy { set; get; }
         public string MetaKeyword { get; set; }
         public string MetaDescription { set; get; }
+
+        [Required]
         public bool Status { set; get; }
-        public virtual IEnumerable<ProductCategoryViewModel> Posts { get; set; }
+        public virtual IEnumerable<ProductCategoryViewModel> Products { get; set; }
     }
 }
