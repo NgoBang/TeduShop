@@ -8,10 +8,10 @@ namespace TeduShop.Web.Models
     {
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Yêu cầu nhập tên danh mục")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Yêu cầu nhập tiêu đề SEO")]
         public string Alias { get; set; }
         public string Description { get; set; }
         public int? ParentID { get; set; }
@@ -25,7 +25,7 @@ namespace TeduShop.Web.Models
         public string MetaKeyword { get; set; }
         public string MetaDescription { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Yêu cầu nhập trạng thái")]
         public bool Status { set; get; }
         public virtual IEnumerable<ProductCategoryViewModel> Products { get; set; }
     }
