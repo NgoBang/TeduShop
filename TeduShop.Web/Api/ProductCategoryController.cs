@@ -16,12 +16,16 @@ namespace TeduShop.Web.Api
     [RoutePrefix("api/productcategory")]
     public class ProductCategoryController : ApiControllerBase
     {
+        #region Initializeprivate
+
         private IProductCategoryService _productCategoryService;
 
         public ProductCategoryController(IErrorService errorService, IProductCategoryService productCategoryService) : base(errorService)
         {
             _productCategoryService = productCategoryService;
         }
+
+        #endregion Initializeprivate
 
         [Route("getall")]
         [HttpGet]
@@ -47,6 +51,20 @@ namespace TeduShop.Web.Api
             });
         }
 
+        [Route("getbyid/{id:int}")]
+        [HttpGet]
+        public HttpResponseMessage GetById(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                var model = _productCategoryService.GetById(id);
+
+                var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(model);
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                return response;
+            });
+        }
+
         [Route("getallparents")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
@@ -54,7 +72,7 @@ namespace TeduShop.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 var model = _productCategoryService.GetAll();
-                
+
                 var responseData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
                 var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
@@ -68,6 +86,34 @@ namespace TeduShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
       {
+          HttpResponseMessage response = null;
+          if (!ModelState.IsValid)
+          {
+              response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+          }
+          else
+          {
+              var newProductCategory = new ProductCategory();
+              newProductCategory.UpdateProductCategory(productCategoryViewModel);
+              newProductCategory.CreateDate = DateTime.Now;
+              _productCategoryService.Add(newProductCategory);
+              _productCategoryService.Save();
+
+              var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(newProductCategory);
+              response = request.CreateResponse(HttpStatusCode.Created, responseData);
+          }
+
+          return response;
+      });
+        }
+
+        [Route("update")]
+        [HttpPut]
+        [AllowAnonymous]
+        public HttpResponseMessage Update(HttpRequestMessage request, ProductCategoryViewModel productCategoryViewModel)
+        {
+            return CreateHttpResponse(request, () =>
+            {
                 HttpResponseMessage response = null;
                 if (!ModelState.IsValid)
                 {
@@ -75,13 +121,14 @@ namespace TeduShop.Web.Api
                 }
                 else
                 {
-                    var newProductCategory = new ProductCategory();
-                    newProductCategory.UpdateProductCategory(productCategoryViewModel);
+                    var dbProductCategory = _productCategoryService.GetById(productCategoryViewModel.ID);
 
-                    _productCategoryService.Add(newProductCategory);
+                    dbProductCategory.UpdateProductCategory(productCategoryViewModel);
+                    dbProductCategory.UpdatedDate = DateTime.Now;
+                    _productCategoryService.Add(dbProductCategory);
                     _productCategoryService.Save();
 
-                    var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(newProductCategory);
+                    var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbProductCategory);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
                 }
 
