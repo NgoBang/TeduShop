@@ -1,12 +1,13 @@
 ﻿using TeduShop.Data.Infrastructure;
+using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Repositories
 {
     public interface IProductTagRepository : IRepository<ProductTag> { }
 
-    public class ProductTag : RepositoryBase<ProductTag>, IProductTagRepository
+    public class ProductTagRepository : RepositoryBase<ProductTag>, IProductTagRepository
     {
-        public ProductTag(IDbFactory dbFactory) : base(dbFactory)
+        public ProductTagRepository(IDbFactory dbFactory) : base(dbFactory)
         {
         }
     }

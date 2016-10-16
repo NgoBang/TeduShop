@@ -4,10 +4,7 @@
     productCategoryEditController.$inject = ['apiService', '$scope', 'notificationService', '$state', '$stateParams', 'commonService'];
 
     function productCategoryEditController(apiService, $scope, notificationService, $state, $stateParams, commonService) {
-        $scope.productCategory = {
-            CreateDate: new Date(),
-            Status: true
-        }
+        $scope.productCategory = {};
 
         $scope.UpdateProductCategory = UpdateProductCategory;
         $scope.GetSeoTitle = GetSeoTitle;

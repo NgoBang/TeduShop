@@ -126,7 +126,7 @@ namespace TeduShop.Web.Api
 
                     dbProductCategory.UpdateProductCategory(productCategoryViewModel);
                     dbProductCategory.UpdatedDate = DateTime.Now;
-                    _productCategoryService.Add(dbProductCategory);
+                    _productCategoryService.Update(dbProductCategory);
                     _productCategoryService.Save();
 
                     var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbProductCategory);

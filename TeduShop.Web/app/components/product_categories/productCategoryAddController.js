@@ -27,7 +27,7 @@
                 console.log('Cannot get list parent');
             });
         }
-
+        loadProductCategoryDetail
         loadParentCategory();
     }
 })(angular.module('tedushop.product_categories'));

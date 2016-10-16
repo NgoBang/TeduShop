@@ -28,7 +28,7 @@
                     checkedProducts: JSON.stringify(listId)
                 }
             }
-            apiService.del('api/product/deletemulti', config, function (result) {
+            apiService.del('/api/product/deletemulti', config, function (result) {
                 notificationService.displaySuccess('Xóa thành công ' + result.data + ' bản ghi');
                 search();
             }, function (error) {
@@ -92,7 +92,7 @@
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không có bản ghi nào được tìm thấy');
                 }
-                $scope.productCategories = result.data.Items;
+                $scope.products = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPages;
                 $scope.totalCount = result.data.TotalCount;
