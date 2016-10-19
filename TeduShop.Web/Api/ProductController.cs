@@ -15,6 +15,7 @@ using TeduShop.Web.Models;
 namespace TeduShop.Web.Api
 {
     [RoutePrefix("api/product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         #region Initializeprivate
@@ -97,6 +98,7 @@ namespace TeduShop.Web.Api
                     var newProduct = new Product();
                     newProduct.UpdateProduct(productViewModel);
                     newProduct.CreateDate = DateTime.Now;
+                    newProduct.CreateBy = User.Identity.Name;
                     _productService.Add(newProduct);
                     _productService.Save();
 
@@ -126,6 +128,7 @@ namespace TeduShop.Web.Api
 
                     dbProduct.UpdateProduct(productViewModel);
                     dbProduct.UpdatedDate = DateTime.Now;
+                    dbProduct.UpdateBy = User.Identity.Name;
                     _productService.Update(dbProduct);
                     _productService.Save();
 
