@@ -4332,6 +4332,8 @@
     <Content Include="Assets\admin\libs\angular-loading-bar\package.json" />
     <Content Include="Assets\admin\libs\angular-loading-bar\PULL_REQUEST_TEMPLATE.md" />
     <Content Include="Assets\admin\libs\angular-loading-bar\README.md" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Assets\admin\libs\angular-local-storage\.bower.json" />
     <Content Include="Assets\admin\libs\angular-local-storage\.bowerrc" />
     <Content Include="Assets\admin\libs\angular-local-storage\.editorconfig" />
