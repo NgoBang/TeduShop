@@ -29,26 +29,16 @@ namespace TeduShop.Web.Api
 
         #endregion Initializeprivate
 
-        [Route("getall")]
+        [Route("getallparents")]
         [HttpGet]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
+        public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
             return CreateHttpResponse(request, () =>
             {
-                int totalRow = 0;
-                var model = _productCategoryService.GetAll(keyword);
+                var model = _productCategoryService.GetAll();
 
-                totalRow = model.Count();
-                var query = model.OrderByDescending(x => x.CreateDate).Skip(page * pageSize).Take(pageSize);
-                var responseData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query);
-                var paginationSet = new PaginationSet<ProductCategoryViewModel>()
-                {
-                    Items = responseData,
-                    Page = page,
-                    TotalCount = totalRow,
-                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize)
-                };
-                var response = request.CreateResponse(HttpStatusCode.OK, paginationSet);
+                var responseData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
                 return response;
             });
         }
@@ -67,16 +57,28 @@ namespace TeduShop.Web.Api
             });
         }
 
-        [Route("getallparents")]
+        [Route("getall")]
         [HttpGet]
-        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        public HttpResponseMessage GetAll(HttpRequestMessage request, string keyword, int page, int pageSize = 20)
         {
             return CreateHttpResponse(request, () =>
             {
-                var model = _productCategoryService.GetAll();
+                int totalRow = 0;
+                var model = _productCategoryService.GetAll(keyword);
 
-                var responseData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
-                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                totalRow = model.Count();
+                var query = model.OrderByDescending(x => x.CreateDate).Skip(page * pageSize).Take(pageSize);
+
+                var responseData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query);
+
+                var paginationSet = new PaginationSet<ProductCategoryViewModel>()
+                {
+                    Items = responseData,
+                    Page = page,
+                    TotalCount = totalRow,
+                    TotalPages = (int)Math.Ceiling((decimal)totalRow / pageSize)
+                };
+                var response = request.CreateResponse(HttpStatusCode.OK, paginationSet);
                 return response;
             });
         }
