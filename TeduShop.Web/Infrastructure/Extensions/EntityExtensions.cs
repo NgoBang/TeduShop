@@ -50,9 +50,11 @@ namespace TeduShop.Web.Infrastructure.Extensions
             productCategory.Alias = productCategoryViewModel.Alias;
             productCategory.Description = productCategoryViewModel.Description;
             productCategory.ParentID = productCategoryViewModel.ParentID;
+            productCategory.DisplayOrder = productCategoryViewModel.DisplayOrder;
             productCategory.Image = productCategoryViewModel.Image;
             productCategory.HomeFlag = productCategoryViewModel.HomeFlag;
             productCategory.CreateDate = productCategoryViewModel.CreateDate;
+
             productCategory.CreateBy = productCategoryViewModel.CreateBy;
             productCategory.UpdatedDate = productCategoryViewModel.UpdatedDate;
             productCategory.UpdateBy = productCategoryViewModel.UpdateBy;
