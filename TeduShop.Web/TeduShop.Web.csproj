@@ -4047,6 +4047,10 @@
     <Content Include="Assets\client\css\etalage.css" />
     <Content Include="Assets\client\css\form.css" />
     <Content Include="Assets\client\css\style.css" />
+    <Content Include="Assets\client\font-awesome-4.6.3\css\font-awesome.css" />
+    <Content Include="Assets\client\font-awesome-4.6.3\css\font-awesome.min.css" />
+    <Content Include="Assets\client\font-awesome-4.6.3\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\client\font-awesome-4.6.3\HELP-US-OUT.txt" />
     <Content Include="Assets\client\images\a-star.png" />
     <Content Include="Assets\client\images\arrow1.png" />
     <Content Include="Assets\client\images\arrow2.png" />
@@ -4139,8 +4143,8 @@
     <Folder Include="UploadedFiles\" />
     <Folder Include="Views\About\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Views\Category\" />
     <Folder Include="Views\Post\" />
-    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -4440,6 +4444,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Category.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Product\Category.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\client\font-awesome-4.6.3\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\client\font-awesome-4.6.3\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\client\font-awesome-4.6.3\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\client\font-awesome-4.6.3\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\client\font-awesome-4.6.3\fonts\FontAwesome.otf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
