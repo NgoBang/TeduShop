@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using TeduShop.Common;
 using TeduShop.Model.Models;
 using TeduShop.Service;
@@ -14,7 +14,7 @@ namespace TeduShop.Web.Controllers
     public class ProductController : Controller
     {
         private IProductService _productService;
-        IProductCategoryService _productCategoryService;
+        private IProductCategoryService _productCategoryService;
 
         public ProductController(IProductService productService, IProductCategoryService productCategoryService)
         {
@@ -25,7 +25,15 @@ namespace TeduShop.Web.Controllers
         // GET: Product
         public ActionResult Detail(int productId)
         {
-            return View();
+            var productModel = _productService.GetById(productId);
+            var productViewModel = Mapper.Map<Product, ProductViewModel>(productModel);
+
+            var relatedProduct = _productService.GetReatedProduct(productId, 6);
+            ViewBag.RelatedProducts = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(relatedProduct);
+
+            List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(productViewModel.MoreImages);
+            ViewBag.MoreImages = listImages;
+            return View(productViewModel);
         }
 
         public ActionResult Category(int id, int page = 1, string sort = "")
@@ -49,6 +57,7 @@ namespace TeduShop.Web.Controllers
             };
             return View(paginationSet);
         }
+
         public ActionResult Search(string keyword, int page = 1, string sort = "")
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
