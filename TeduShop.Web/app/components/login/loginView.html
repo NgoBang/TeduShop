@@ -1,39 +1,49 @@
-﻿<div class="login-box">
-    <div class="login-logo">
-        <a href="#"><b>DEMO</b>SHOP</a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Đăng nhập hệ thống</p>
-        <form role="form" method="post" ng-submit="loginSubmit()">
-            <div class="form-group has-feedback">
-                <label>User name </label>
-                    <input type="text" class="form-control" placeholder="Tài khoản" ng-model="loginData.userName">
+﻿<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>DEMO</b>SHOP</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Đăng nhập hệ thống</p>
+            <form role="form" method="post" ng-submit="loginSubmit()">
+                <div class="form-group has-feedback">
+                    <label for="exampleInputEmail1">User name </label>
+                    <input type="text" id="exampleInputEmail1" class="form-control" placeholder="Tài khoản" ng-model="loginData.userName">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-               
-            </div>
-            <div class="form-group has-feedback">
-                <label>Password </label>
-                    <input type="password" class="form-control" placeholder="Mật khẩu" ng-model="loginData.password">
+                </div>
+                <div class="form-group has-feedback">
+                    <label for="exampleInputPassword1">Password </label>
+                    <input type="password" id="exampleInputPassword1" class="form-control" placeholder="Mật khẩu" ng-model="loginData.password">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-               
-            </div>
-            <div class="row">
-                <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> Nhớ mật khẩu
-                        </label>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                <input type="checkbox"> Nhớ mật khẩu
+                            </label>
+                        </div>
                     </div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
+                    </div>
+                    <!-- /.col -->
                 </div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
-                </div>
-                <!-- /.col -->
-            </div>
-        </form>
+            </form>
+        </div>
+        <!-- /.login-box-body -->
     </div>
-    <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
+    <!-- /.login-box -->
+
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+</body>

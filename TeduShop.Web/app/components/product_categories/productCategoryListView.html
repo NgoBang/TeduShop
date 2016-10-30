@@ -11,64 +11,88 @@
 </section>
 <!-- Main content -->
 <section class="content">
-    <!-- Default box -->
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title">Danh mục sản phẩm</h3>
-            <div class="box-tools pull-right">
-                <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-                <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-            </div>
-        </div>
-        <div class="box-body">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="input-group">
-                    <input type="text" class="form-control" ng-model="keyword" placeholder="Từ khóa">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="search()">Tìm kiếm</button>
-                    </span>
-                </div><!-- /input-group -->
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-success" ui-sref="add_product_category">Thêm mới</button>
-                <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
-            </div>
-        </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                        <tr>
-                            <th><input name="all" type="checkbox" ng-click="selectAll()" /></th>
-                            <th style="width: 3%">ID</th>
-                            <th style="width: 59%">Tên danh mục</th>
-                            <th style="width: 20%">Ngày tạo</th>
-                            <th style="width: 10%">Trạng thái</th>
-                            <th style="width: 8%">Thao tác</th>
-                        </tr>
-                        <tr ng-repeat="item in productCategories">
-                            <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
-                            <td>{{item.ID}}</td>
-                            <td>{{item.Name}}</td>
-                            <td>{{item.CreateDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
-                            <!--class="badge bg-red"-->
-                            <td><span ng-class="{'badge bg-red':item.Status==false, 'badge bg-green':item.Status==true}">
-                                {{item.Status | statusFilter}}
-                                </span></td>
-                            <td class="btn btn-sm btn-primary" ui-sref="edit_product_category({id:item.ID})"><i class="fa fa-pencil"></i></td>
-                            <td class="btn btn-sm btn-danger" ng-click="deleteProductCategory(item.ID)"><i class="fa fa-trash"></i></td>
-                        </tr>
-                        <tfoot>
-                            <tr>
-                                <td colspan="6"><span class="pull-right">Trang: <b>{{page+1}}</b> - Tổng số bản ghi: <b>{{totalCount}}</b></span></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Danh mục sản phẩm</h3>
                 </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input type="text" class="form-control" ng-model="keyword" placeholder="Từ khóa">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" ng-click="search()">Tìm kiếm</button>
+                                </span>
+                            </div><!-- /input-group -->
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-success" ui-sref="add_product_category">Thêm mới</button>
+                            <button class="btn btn-danger" ng-click="deleteMultiple()" id="btnDelete" disabled>Xóa</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table-hover dataTable" id="example2" role="grid" aria-describedby="example2_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th><input name="all" type="checkbox" ng-click="selectAll()" /></th>
+                                        <th style="width: 3%" tabindex="0" class="sorting_asc" aria-controls="example2" aria-sort="ascending">ID</th>
+                                        <th style="width: 55%" tabindex="0" class="sorting" aria-controls="example2">Tên danh mục</th>
+                                        <th style="width: 20%" tabindex="0" class="sorting" aria-controls="example2">Ngày tạo</th>
+                                        <th style="width: 12%" tabindex="0" class="sorting" aria-controls="example2">Trạng thái</th>
+                                        <th style="width: 10%" tabindex="0" class="sorting" aria-controls="example2">Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="even" role="row" ng-repeat="item in productCategories">
+                                        <td><input type="checkbox" ng-model="item.checked" name="all" /></td>
+                                        <td class="sorting_1">{{item.ID}}</td>
+                                        <td>{{item.Name}}</td>
+                                        <td>{{item.CreateDate | date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                                        <td>
+                                            <span ng-class="{'badge bg-red':item.Status==false, 'badge bg-green':item.Status==true}">
+                                                {{item.Status | statusFilter}}
+                                            </span>
+                                        </td>
+                                        <td class="btn btn-sm btn-primary" ui-sref="edit_product_category({id:item.ID})"><i class="fa fa-pencil"></i></td>
+                                        <td class="btn btn-sm btn-danger" ng-click="deleteProductCategory(item.ID)"><i class="fa fa-trash"></i></td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6"><span class="pull-right">Trang: <b>{{page+1}}</b> - Tổng số bản ghi: <b>{{totalCount}}</b></span></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="box-footer">
+                            <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCategories(page)"></pager-directive>
+                        </div><!-- /.box-footer-->
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                
             </div>
-        </div><!-- /.box-body -->
-        <div class="box-footer">
-        <pager-directive page="{{page}}" custom-path="{{customPath}}" pages-count="{{pagesCount}}" total-count="{{totalCount}}" search-func="getProductCategories(page)"></pager-directive>
-        </div><!-- /.box-footer-->
-    </div><!-- /.box -->
-</section><!-- /.content -->
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+
+    <script>
+        $(function () {
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false
+            });
+        });
+    </script>
+    <!-- /.row -->
+</section>
