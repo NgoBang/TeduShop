@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
-using TeduShop.Model.Abstract;
 using TeduShop.Model.Models;
 
 namespace TeduShop.Data
@@ -30,11 +29,13 @@ namespace TeduShop.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<VisitorStatistic> VisitorStatistics { get; set; }
         public DbSet<Error> Errors { get; set; }
+        public DbSet<ContactDetail> ContactDetails { get; set; }
 
         public static TeduShopDbContext Create()
         {
             return new TeduShopDbContext();
         }
+
         protected override void OnModelCreating(DbModelBuilder builder)
         {
             base.OnModelCreating(builder);

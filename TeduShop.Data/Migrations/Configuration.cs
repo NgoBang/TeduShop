@@ -20,6 +20,7 @@
             CreateProductCategorySample(context);
             CreateSlide(context);
             CreatePage(context);
+            CreateContactDetail(context);
         }
 
         private void CreateUser(TeduShopDbContext context)
@@ -127,6 +128,27 @@
                     Status = true
                 };
                 context.Pages.Add(page);
+                context.SaveChanges();
+            }
+        }
+
+        private void CreateContactDetail(TeduShopDbContext context)
+        {
+            if (context.ContactDetails.Count() == 0)
+            {
+                var contactDetail = new TeduShop.Model.Models.ContactDetail()
+                {
+                    Name = "Shop thời trang TEDU",
+                    Address = "Ngõ 77 Xuân La",
+                    Email = "tedu@gmail.com",
+                    Lat= 21.0631729,
+                    Lng= 105.8063316,
+                    Phone="0123456789",
+                    Website="http://tedu.com.vn",
+                    Other="",
+                    Status = true
+                };
+                context.ContactDetails.Add(contactDetail);
                 context.SaveChanges();
             }
         }
