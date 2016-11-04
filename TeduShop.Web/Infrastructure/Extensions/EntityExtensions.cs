@@ -1,4 +1,5 @@
-﻿using TeduShop.Model.Models;
+﻿using System;
+using TeduShop.Model.Models;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Infrastructure.Extensions
@@ -88,6 +89,15 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.Status = productViewModel.Status;
             product.Tags = productViewModel.Tags;
             product.Quantity = productViewModel.Quantity;
+        }
+
+        public static void UpdateFeedBack(this Feedback feedBack, FeedbackViewModel feedBackViewModel)
+        {
+            feedBack.Name = feedBackViewModel.Name;
+            feedBack.Email = feedBackViewModel.Email;
+            feedBack.Message = feedBackViewModel.Message;
+            feedBack.Status = feedBackViewModel.Status;
+            feedBack.CreateDate = DateTime.Now;
         }
     }
 }
