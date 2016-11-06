@@ -20,7 +20,7 @@ namespace TeduShop.Web.Controllers
             _commonService = commonService;
         }
 
-        [OutputCache(Duration = 60, Location = System.Web.UI.OutputCacheLocation.Server)]
+        [OutputCache(Duration = 60, Location = System.Web.UI.OutputCacheLocation.Client)]
         public ActionResult Index()
         {
             var slideModel = _commonService.GetSlides();

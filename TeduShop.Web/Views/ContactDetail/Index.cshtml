@@ -62,10 +62,10 @@
                     @Html.TextBoxFor(model => model.Email, new { @class = "textbox" });
                     @Html.TextAreaFor(model => model.Message);
 
-                    { MvcCaptcha contactCapcha = new MvcCaptcha("contactCapcha"); 
+                        MvcCaptcha contactCapcha = new MvcCaptcha("contactCapcha");
                         @Html.Captcha(contactCapcha)
                         @Html.TextBox("CaptchaCode")
-                    }
+                    
                         <input type="submit" value="Send">
                         <div class="clearfix"> </div>
                 }
